@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  */
 class ProductsController extends AppController {
 
-	public $helpers = array('Number', 'Js' => array('Jquery'));
+	public $helpers = array('Number', 'Js' => array('Jquery'), 'Tools.Tree');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -41,7 +41,7 @@ class ProductsController extends AppController {
 		}
 		$this->set('products', $this->paginate());
 
-		$productCategories = $this->Product->ProductCategory->find('list', array('order' => 'ProductCategory.name ASC'));
+		$productCategories = $this->Product->ProductCategory->find('threaded', array('order' => 'ProductCategory.lft ASC'));
 		$this->set('productCategories', $productCategories);
 	}
 
@@ -176,17 +176,18 @@ class ProductsController extends AppController {
 			$products = $this->Product->find('all', array(
 				'conditions' => array('ProductCategory.slug' => $category_slug),
 				'order' => 'Product.created DESC',
-			));
+   			));
+      	$this->set('page_title', Inflector::humanize($category_slug));
 		} else {
 			$products = $this->Product->find('all', array(
 				'order' => 'Product.created DESC',
 			));			
+		   $this->set('page_title', __('All Categories') );
 		}
 
 		$this->set('products', $products);
 
-		$this->set('page_title', Inflector::humanize($category_slug));
-		
+		$productCategories = $this->Product->ProductCategory->find('threaded');
 		$this->set('productCategories', $productCategories);
 	}
 
@@ -203,6 +204,7 @@ class ProductsController extends AppController {
 		$this->paginate = array(
 			'conditions' => array(
 				'Product.name LIKE' => '%' . $term . '%',
+				'Product.desc LIKE' => '%' . $term . '%',
 			),
 			'order' => 'Product.created DESC'
 		);

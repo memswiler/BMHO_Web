@@ -1,0 +1,47 @@
+.responsive { /* Customisable base class for style override DIV */
+	max-width: 1200px;
+	min-width: 400px;
+	height: 200px;
+	margin-bottom: 1em;
+	overflow: hidden;
+}
+
+	.responsive .simply-scroll-clip {
+		width: 1200px;
+		height: 200px;
+	}
+	
+		.responsive .simply-scroll-list {}
+		
+		.responsive .simply-scroll-list li {
+			float: left;
+			width: 290px;
+			height: 200px;
+		}
+@media (max-width: 480px) {
+	.responsive {
+		width: 400px;
+	}
+}
+@media (min-width: 481px) and (max-width: 767px) {
+	.responsive {
+		width: 600px;
+	}
+}
+@media (min-width: 768px) and (max-width: 979px) {
+	.responsive {
+		width: 800px;
+	}
+}
+
+@media (min-width: 980px) {
+	.responsive {
+		width: 980px;
+	}
+}
+@media (min-width: 1200px) {
+	.responsive {
+		width: 1200px;
+	}
+}
+

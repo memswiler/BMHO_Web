@@ -59,6 +59,33 @@
 			'helpBlock' => __('Browse and select your banner\'s image.') . ' <b>' . __('Recommended size is 600px x 237px.') . '</b>',
 		));
 
+		echo $this->Form->input('scroller_count', array(
+			'label' => __('scroller_count'),
+			'class' => 'input-xlarge span3',
+			'helpBlock' => __('Click Save Below to Refresh Page to Show Upload Fields'),
+			'default' => Configure::read('MyApp.scroller_count')
+		));
+
+      for ( $imgId = 1; $imgId <= Configure::read('MyApp.scroller_count'); $imgId++ ) {
+         $scrollerId = __('scroller') . $imgId;
+         $scrollerKey= __('MyApp.') . $scrollerId;
+		   $scroller[$imgId] = Configure::read( $scrollerKey );
+
+		   if (isset($scroller[$imgId])) {
+			   echo '<div class="control-group"><div class="controls">';
+			   echo $this->Html->image('/files/scroller/' .  $scroller[$imgId], array('style' => 'height: 80px'));
+			   echo '</div></div>';
+		   }
+
+		   echo $this->Form->input($scrollerId, array(
+			   'label' => $scrollerId,
+			   'value' => $scroller[$imgId],
+			   'class' => 'input-xlarge',
+			   'type' => 'file',
+			   'helpBlock' => __('Browse and select scroller\'s image #' . $imgId. '.') . ' <b>' . __('Recommended size is 520px x 240px.') . '</b>',
+		   ));
+         }
+
 		echo $this->Form->input('currency', array(
 			'label' => __('Currency'),
 			'class' => 'input-xlarge span3',
@@ -66,7 +93,7 @@
 		));
 		?>
 		<?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-primary')); ?>
-		<?php echo $this->Html->link(__('Clear all samples data'), array('action' => 'clearAllData'), array('class' => 'btn btn-danger pull-right', 'icon' => 'trash white'), __('Are you sure?')); ?>
+		<?php echo $this->Html->link(__('Clear all sample data!!!'), array('action' => 'clearAllData'), array('class' => 'btn btn-danger pull-right', 'icon' => 'trash white'), __('WARNING: Are you sure?')); ?>
 	</fieldset>
 	<?php echo $this->Form->end(); ?>
 </div>

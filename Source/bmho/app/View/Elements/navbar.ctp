@@ -6,12 +6,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
             <div class="nav-collapse">
                 <ul class="nav">
 					<?php if (AuthComponent::user('id')) : ?>
@@ -91,16 +85,24 @@
         </div>
     </div>
 </div>
-
-<div class="pull-left" >
-   <div class="hero-unit" style="position:relative; min-height: 0px; min-width: 200px; line-height: 10px;background-image: url(<?php echo Router::Url( '/', true ) . Configure::read('MyApp.banner'); ?>); background-repeat: no-repeat; background-position: left top">
+<div class="container">
+   <div class="container pull-left">
+      <div class="hero-unit" style="position:relative; min-height: 0px; min-width: 200px; line-height: 10px;background-image: url(<?php echo Router::Url( '/', true ) . Configure::read('MyApp.banner'); ?>); background-repeat: no-repeat; background-position: left middle">
+         <div class="container">
+            <div class="pull-right" style="position: absolute; top: 0px; left: 280px; right: 210px; line-height: 20px;">
+               <h3 style="display: inline-block"><?php echo __('Welcome to'); ?></h3> <h2 style="display: inline-block"><?php echo Configure::read('MyApp.website_title'); ?></h2><br>
+               <p align="right"><?php echo Configure::read('MyApp.website_desc'); ?></align>
+            </div>
+            <div class="pull-right" style="position: absolute; top: 15px; right: 15px; line-height: 30px;">
+            <a href="register/basic" class="btn btn-primary btn-small" style="width:160px"><div class="pull-left"><i class="icon-white icon-shopping-cart" style="align: left"></i></div> Basic <div class="pull-right"> $1/month </div> </a><br>
+            <a href="register/basic-plus" class="btn btn-warning btn-small" style="width:160px"><div class="pull-left"><i class="icon-white icon-plus" style="align: left"></i></div> Basic Plus <div class="pull-right"> $5/month </div> </a><br>
+            <a href="register/premium" class="btn btn-success btn-small" style="width:160px"><div class="pull-left"><i class="icon-white icon-star" style="align: left"></i></div> Premium <div class="pull-right">$10/month </div> </a>
+            </div>
+         </div>
+      </div>
+     <img class="top" style="position: absolute; top: 60px; right: 10px; z-index:100;" src="<?php echo $this->webroot . 'img/ribbon-free.jpg'; ?>"/>
    </div>
-</div>
-<div class="pull-right">
-   <a href="#" class="btn btn-primary btn-small" style="width:160px"><div class="pull-left"><i class="icon-white icon-shopping-cart" style="align: left"></i></div> Basic <div class="pull-right"> $1/month </div> </a><br>
-   <a href="#" class="btn btn-warning btn-small" style="width:160px"><div class="pull-left"><i class="icon-white icon-plus" style="align: left"></i></div> Basic Plus <div class="pull-right"> $5/month </div> </a><br>
-   <a href="#" class="btn btn-success btn-small" style="width:160px"><div class="pull-left"><i class="icon-white icon-star" style="align: left"></i></div> Premium <div class="pull-right">$10/month </div> </a>
-</div>
+</div><!-- container -->
 <?php $this->start('scriptBottom'); ?>
 <script>
 //	$(document).ready(function() {

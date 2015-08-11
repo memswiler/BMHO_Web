@@ -9,11 +9,7 @@
         <title><?php echo!empty($title_for_layout) ? $title_for_layout . ' | ' : ''; ?><?php echo Configure::read('MyApp.website_title') ?></title>
         <meta name="description" content="<?php echo!empty($page_description) ? $page_description : Configure::read('MyApp.website_desc') ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--
-      <script type="text/javascript">var switchTo5x=true;</script>
-      <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-      <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
--->
+
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <style>
             body {
@@ -35,11 +31,16 @@
 		<?php echo $this->Html->css('redactor') ?>
 		<?php echo $this->Html->css('style') ?>
 
+		<?php echo $this->Html->css('jquery.simplyscroll') ?>
+		<?php echo $this->Html->css('jquery.simplyscroll-responsive') ?>
+
 		<?php echo $this->Html->script('lib/modernizr') ?>
 
 		<?php echo $this->fetch('scriptTop'); ?>
 
-		<script type="text/javascript">var switchTo5x = true;</script>
+      <script type="text/javascript">var switchTo5x=true;</script>
+      <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+      <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
 
     </head>
     <body>
@@ -57,20 +58,15 @@
 				<?php echo $this->fetch('content'); ?>
             </div>
 
-            <hr>
-<div class="container">
-	<div class="pull-right" >
-         <a href="#" class="btn btn-primary btn-small"><i class="icon-white icon-shopping-cart"></i> Basic $1/month </a>
-         <a href="#" class="btn btn-warning btn-small"><i class="icon-white icon-plus"></i> Basic Plus $5/month</a>
-         <a href="#" class="btn btn-success btn-small"><i class="icon-white icon-star"></i> Premium $10/month </a>
-   </div>
-</div>
-            <hr>
             <footer>
-<!--
-	   <a class="btn btn-info" href="<?php echo $this->webroot . 'manager/shops/register'; ?>"><i class="icon-shopping-cart icon-white"></i> <?php echo __('Sell'); ?></a>
--->								
-                <p><a href="<?php echo $home ?>"><u>Home</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $about ?>"><u>About</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $contact ?>"><u>Contact</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $terms ?>"><u>Terms of Use</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $privacy ?>"><u>Privacy Policy</u></a><br><font size="-1">Website Design, Content, Text, Art &copy; 2015, <b><?php echo Configure::read('MyApp.website_title') ?></b>, LLC. Product Images &copy; Respective Owners</font></p>
+	            <div class="pull-left" >
+                  <a href="manager/shops/register/basic" class="btn btn-primary btn-small"><i class="icon-white icon-shopping-cart"></i> Basic $1/month </a>
+                  <a href="manager/shops/register/basic-plus" class="btn btn-warning btn-small"><i class="icon-white icon-plus"></i> Basic Plus $5/month</a>
+                  <a href="manager/shops/register/premium" class="btn btn-success btn-small"><i class="icon-white icon-star"></i> Premium $10/month </a>
+               </div>
+               <div class="pull-right" style="text-align: right">
+                   <p><a href="<?php echo $home ?>"><u>Home</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $about ?>"><u>About</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $contact ?>"><u>Contact</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $terms ?>"><u>Terms of Use</u></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $privacy ?>"><u>Privacy Policy</u></a><br><font size="-1">Website Design, Content, Text, Art &copy; 2015, <b><?php echo Configure::read('MyApp.website_title') ?></b>, LLC. Product Images &copy; Respective Owners</font></p>
+               </div>                
             </footer>
 
         </div> <!-- /container -->
@@ -79,6 +75,14 @@
 		<?php echo $this->Html->script('lib/jquery'); ?>
         <script>window.jQuery || document.write('<script src="<?php echo $this->params->webroot ?>js/lib/jquery.min.js"><\/script>')</script>
 
+      <script type="text/javascript">
+      (function($) {
+         $(function() {
+	         $("#scroller").simplyScroll({customClass:'responsive'});
+         });
+      })(jQuery);
+      </script>
+
 		<?php
 		echo $this->Html->script(
 				array(
@@ -86,8 +90,9 @@
 					'lib/jquery.colorbox',
 					'lib/jquery.iframeResizer.min',
 					'lib/jquery.scrollTo.min',
+					'lib/jquery.simplyscroll',
 					'lib/redactor.min',
-					'src/scripts.js',
+					'src/scripts',
 					'bootstrap-modalmanager',
 					'bootstrap-modal'
 		));
@@ -100,14 +105,14 @@
           g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
           s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>-->
-<!--
+
+		<?php echo $this->fetch('scriptBottom'); ?>
+		
       <script type="text/javascript">stLight.options({publisher: "e2375b2a-b9b5-4c58-af7f-c85cfb1e192e", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
       <script>
-      var options={ "publisher": "e2375b2a-b9b5-4c58-af7f-c85cfb1e192e", "position": "right", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "linkedin", "pinterest", "email", "sharethis"]}};
+      var options={ "publisher": "e2375b2a-b9b5-4c58-af7f-c85cfb1e192e", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["sharethis", "facebook", "twitter", "amazon_wishlist", "email", "googleplus", "pinterest", "tumblr", "friendfeed", "stumbleupon", "pocket", "evernote", "reddit", "delicious", "digg"]}};
       var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
       </script>
--->
-		<?php echo $this->fetch('scriptBottom'); ?>
 
 		<?php echo $this->Js->writeBuffer(); ?>
     </body>

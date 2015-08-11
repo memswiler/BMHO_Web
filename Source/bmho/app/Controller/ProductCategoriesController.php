@@ -20,21 +20,23 @@ public function index($id=null) {
 		$this->ProductCategory->recursive = 2;
 
   // if it's ajax, set ajax layout
-  if (!empty($this->params['named']['isAjax']))
+  if (isset($this->params['named']['isAjax']))
    $this->layout = 'ajax';
    
    if ($id==null) {
-      $productCategories = $this->ProductCategory->find('threaded');
+      $productCategories = $this->ProductCategory->find('threaded', array( 'conditions'=>'ProductCategory.parent_id = NULL' ));
       }
    else {
       $productCategory = $this->ProductCategory->read(null, $id);
-      $parentCategory = $this->ProductCategory->ParentCategory->read(null, $parent_id);
+      $parentCategory = $this->ProductCategory->ParentCategory->read(null, $productCategory['ProductCategory']['parent_id']);
       $productCategories = $this->ProductCategory->children($id);
+
+      $this->set('ProductCategory', $productCategory);
+      $this->set('ParentCategory', $parentCategory);
+  	   $this->request->data['ProductCategory']['parent_id'] = $product_category_id;
       }
    
-//   $categories = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
-//   $currentCategory = $categories;
-   $this->set(compact('productCategories'));    
+	$this->set('productCategories', $productCategories);
    }
 
 	
@@ -47,7 +49,7 @@ public function index($id=null) {
 		$this->ProductCategory->recursive = 2;
 		// special handling for ALL items, TOP items, Parent items:
 		// if null comes in, change to empty '' and show ALL
-		if ($product_category_id!=null)) {
+		if ($product_category_id!=null) {
 		   // if empty comes in, change to null, and show TOP
 		   if ($product_category_id=='') {
 		         $product_category_id=null;

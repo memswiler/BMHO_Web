@@ -1,7 +1,7 @@
 <style>
 	.crop {
-		width: 260px;
-		height: 195px;
+		width: 130px;
+		height: 95px;
 		overflow: hidden;
 		position: relative;
 	}
@@ -50,13 +50,3 @@
 	<?php endforeach; ?>
 </ul>
 
-<!--<div class="row-fluid">
-<?php foreach ($products as $product) : ?>
-				<div class="mythumbnail">
-					<img style="width: 300px; height: 200px;" src="<?php echo $this->webroot . $product['Product']['image']; ?>" />
-					<div class="caption">
-						<a href="<?php echo $this->webroot . 'products/view/' . $product['Product']['slug']; ?>"><?php echo String::truncate($product['Product']['name'], 60); ?></a>
-					</div>
-				</div>
-<?php endforeach; ?>
-</div>-->
